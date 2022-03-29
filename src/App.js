@@ -3,11 +3,27 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  const firstFive = allContacts.slice(0.5);
+  const firstFive = allContacts.slice(0,5);
   const [celebs, setCelebs] = useState(firstFive);
+  const setOfCelebs = new Set(celebs);
+
+  function pickRandomCeleb () {
+    return Math.floor(Math.random() * allContacts.length)
+  }
 
   return (
     <div className="App">
+
+    <button onClick={()=> {
+      console.log(setOfCelebs);
+      let randomNum = pickRandomCeleb()
+      if (!setOfCelebs.has(randomNum)){
+        setOfCelebs.add(allContacts[randomNum])
+        setCelebs((celebs) => {
+          return [...celebs, allContacts[randomNum]]
+        });
+      }}} >Add random celebrity</button>
+
       <h1>Iron Contacts</h1>
       <table>
         <thead>
