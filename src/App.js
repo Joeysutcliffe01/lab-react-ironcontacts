@@ -11,6 +11,17 @@ function App() {
     return Math.floor(Math.random() * allContacts.length);
   }
 
+  function deleteCharacter(characterIdToFind) {
+    setOfCelebs.forEach((elem) => {
+      if(elem.id === characterIdToFind) {
+        setOfCelebs.delete(elem)
+      }
+    })
+    setCelebs(() => {
+      return [...setOfCelebs];
+    });
+  }
+
   return (
     <div className="App">
       <button
@@ -105,7 +116,9 @@ function App() {
                 <td>
                   <h3>{emmy}</h3>
                 </td>
-                <td>{/* <button> Delete </button> */}</td>
+                <td>{<button onClick={() => {
+                  return deleteCharacter(elem.id)
+                }}> Delete </button>}</td>
               </tr>
             );
           })}
