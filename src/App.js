@@ -13,10 +13,10 @@ function App() {
 
   function deleteCharacter(characterIdToFind) {
     setOfCelebs.forEach((elem) => {
-      if(elem.id === characterIdToFind) {
-        setOfCelebs.delete(elem)
+      if (elem.id === characterIdToFind) {
+        setOfCelebs.delete(elem);
       }
-    })
+    });
     setCelebs(() => {
       return [...setOfCelebs];
     });
@@ -24,63 +24,66 @@ function App() {
 
   return (
     <div className="App">
-      <button
-        onClick={() => {
-          console.log(setOfCelebs);
-          let randomNum = pickRandomCeleb();
-          if (!setOfCelebs.has(randomNum)) {
-            setOfCelebs.add(allContacts[randomNum]);
-            setCelebs((celebs) => {
-              return [...celebs, allContacts[randomNum]];
-            });
-          }
-        }}
-      >
-        Add random celebrity
-      </button>
-
-      <button
-        onClick={() => {
-          setCelebs((celebs) => {
-            return Array.from(setOfCelebs).sort((a, b) => {
-              if (a.name > b.name) {
-                return 1;
-              } else {
-                return -1;
-              }
-            });
-          });
-        }}
-      >
-        Sort by Name
-      </button>
-
-      <button
-        onClick={() => {
-          setCelebs((celebs) => {
-            return Array.from(setOfCelebs).sort((a, b) => {
-              if (a.popularity > b.popularity) {
-                return -1;
-              } else {
-                return 1;
-              }
-            });
-          });
-        }}
-      >
-        Sort by Name
-      </button>
-
       <h1>Iron Contacts</h1>
+
+      <div className="topContainer">
+        <button
+          onClick={() => {
+            console.log(setOfCelebs);
+            let randomNum = pickRandomCeleb();
+            if (!setOfCelebs.has(randomNum)) {
+              setOfCelebs.add(allContacts[randomNum]);
+              setCelebs((celebs) => {
+                return [...celebs, allContacts[randomNum]];
+              });
+            }
+          }}
+        >
+          Add random celebrity
+        </button>
+
+        <button
+          onClick={() => {
+            setCelebs((celebs) => {
+              return Array.from(setOfCelebs).sort((a, b) => {
+                if (a.name > b.name) {
+                  return 1;
+                } else {
+                  return -1;
+                }
+              });
+            });
+          }}
+        >
+          Sort by Name
+        </button>
+
+        <button
+          onClick={() => {
+            setCelebs((celebs) => {
+              return Array.from(setOfCelebs).sort((a, b) => {
+                if (a.popularity > b.popularity) {
+                  return -1;
+                } else {
+                  return 1;
+                }
+              });
+            });
+          }}
+        >
+          Sort by Name
+        </button>
+      </div>
+
       <table>
         <thead>
           <tr>
-            <th>Picture</th>
-            <th>Name</th>
-            <th>Popularity</th>
-            <th>Won Oscar</th>
-            <th>Won Emmy</th>
-            <th>Actions</th>
+            <th className="Head">Picture</th>
+            <th className="Head">Name</th>
+            <th className="Head">Popularity</th>
+            <th className="Head">Won Oscar</th>
+            <th className="Head">Won Emmy</th>
+            <th className="Head">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -116,9 +119,18 @@ function App() {
                 <td>
                   <h3>{emmy}</h3>
                 </td>
-                <td>{<button onClick={() => {
-                  return deleteCharacter(elem.id)
-                }}> Delete </button>}</td>
+                <td>
+                  {
+                    <button
+                      onClick={() => {
+                        return deleteCharacter(elem.id);
+                      }}
+                    >
+                      {" "}
+                      Delete{" "}
+                    </button>
+                  }
+                </td>
               </tr>
             );
           })}
